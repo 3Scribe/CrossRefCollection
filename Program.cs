@@ -7,7 +7,11 @@ namespace CrossRefCollection
     {
         static void Main(string[] args)
         {
-            CrossReference<int, int, int> _TestTable = new CrossReference<int, int, int>(6);
+            // Example 1.  Initialising a blank object and then passing a complete object[,] to the Table parameter to 
+            // fill in row and column keys and all data values.  In this example the table data represents the available bit rates
+            // 
+
+            CrossReference<int, int, int> _TestTable = new CrossReference<int, int, int>();
 
             _TestTable.Table = new object[,]
             {
@@ -30,9 +34,47 @@ namespace CrossRefCollection
                 { 1111,   -1,   -1,   -1,   -1,   -1,   -1 }
             };
 
+            PrintOutTable(_TestTable);
+
+            CrossReference<string, int, bool> _TestTableB = new CrossReference<string, int, bool>(new string[] { "A", "B", "C" }, new int[] { 1, 2, 3 });
+
+            _TestTableB["A", 1] = true;
+            _TestTableB["B", 2] = true;
+            _TestTableB["C", 3] = true;
 
 
-            Console.WriteLine("Hello World!");
+
+            _TestTableB.Columns = new List<int>() { 9, 8, 7 };
+
+
+            CrossReference<string, string, double> _TestTableC = new CrossReference<string, string, double>();
+
+            _TestTableC.AddColumns(new string[] { "X", "Y", "Z" });
+            _TestTableC.AddRows(new string[] { "X", "Y", "Z" });
+
+            _TestTableC["X", "Z"] = 1.5;
+            _TestTableC["Y", "Y"] = 1.5;
+            _TestTableC["Z", "X"] = 1.5;
+
+            _TestTableC.AddColumns("A", "B", "C");
+
+            _TestTableC["X", "A"] = 2.1;
+            _TestTableC["Y", "B"] = 2.1;
+            _TestTableC["Z", "C"] = 2.1;
+
+        }
+
+        static void PrintOutTable<TRows, TColumns, TData>(CrossReference<TRows, TColumns, TData> TargetTable)
+        {
+            foreach(TRows _Row in TargetTable.Rows)
+            {
+                foreach(TColumns _Column in TargetTable.Columns)
+                {
+                    Console.WriteLine(TargetTable[_Row, _Column]);
+                }
+            }
+
+
         }
     }
 }
