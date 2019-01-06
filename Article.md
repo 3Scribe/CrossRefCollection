@@ -1,4 +1,16 @@
-# CrossRefCollection
+# CrossRefCollection - Add a multi-dimensional dictionary collection to the language
+
+**Eddie Gahan**
+
+**January 2019**
+
+The moral of this article is that you should never be afraid to extend the language.  It's something I always try to impress upon newcomers to C#, that if they're facing repetive tasks or find themselves putting the same methods into their classes over and over, they can just add an extention method and neatly wrap up their utility functions.
+
+Currently, I'm building a library to identify audio encodings used in a byte stream and there's a lot of look-up tables required to determine bit rates, sample sizes and so on.  So, I decided to build a little extention to System.Collections.Generic that creates a multi-dimensional Dictionary collection that allows for strongly typed row/column keys and data values accessing data by a multi-parameter indexer function.  The collection listed below is the result of my work and it can be found on NuGet [here](https://www.nuget.org/packages/3Scribe.Utilities.CrossRefCollection/) with the code available openly with a little console class to demo it available [here](https://github.com/3Scribe/CrossRefCollection).
+
+
+------------------------------
+
 **CrossReference<TRows, TColumns, TData>**
 
 Add a generic collection called CrossReference to the System.Collections.Generic namespace that allows for creation of a multi-dimensional keyed dictionary.  Values in the table are accessed by providing a row and column key.  For example, if you had a collection called PrimaryColours with the following data saved in it:
@@ -27,8 +39,6 @@ with ["X",3] = false and ["Y", 2] = true.
 
 
 **Set Up**
-
-The package is available on NuGet [here](https://www.nuget.org/packages/3Scribe.Utilities.CrossRefCollection/)
 
 As this is an extention to the System.Collections.Generic namespace only that specific library will be required:
 
